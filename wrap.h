@@ -5,12 +5,20 @@ struct message
     unsigned long long x;
 };
 
+struct messagefloat
+{
+    float x;
+    float y;
+    float z;
+};
+
 void signalHandler(int signal_value);
 
 void* bindpub(void* context, char* socket)
 {
     void* publisher = zmq_socket(context, ZMQ_PUB);
     int rc = zmq_bind(publisher, socket);
+    assert(rc == 0);
     printf("Publisher connected\n");
     return publisher;
 }
@@ -25,7 +33,7 @@ void* connectsub(void* context, char* socket)
     return subscriber;
 }
 
-void startmsg(void* pub, void* sub, int* keepLooping)
+void startmsg(void* pub, int* keepLooping)
 {
     signal(SIGINT, signalHandler);
     unsigned long long i = 0;
@@ -39,26 +47,31 @@ void startmsg(void* pub, void* sub, int* keepLooping)
         zmq_msg_init_size(&msg, framesize);
         memcpy(zmq_msg_data(&msg), &currmsg, framesize);
         zmq_msg_send(&msg, pub, ZMQ_DONTWAIT);
+        printf("Sending %llu\r", currmsg.x);
         i++;
-
-        // Receive message
-        zmq_msg_t recv_msg;
-        zmq_msg_init(&recv_msg);
-        int size = zmq_msg_recv(&recv_msg, sub, ZMQ_DONTWAIT);
-        if (size != -1)
-        {
-            struct message recv_msg_struct;
-            memcpy(&recv_msg_struct, zmq_msg_data(&recv_msg), sizeof(recv_msg_struct));
-            printf("%llu\r", recv_msg_struct.x);
-        }
-        zmq_msg_close(&recv_msg);
     }
 }
 
-void cleanup(void* pub, void* sub, void* context)
+void pubmsg(void* pub, float values[3]) {
+    struct messagefloat currmsg;
+    currmsg.x = values[0];
+    currmsg.y = values[1];
+    currmsg.z = values[2];
+    zmq_msg_t msg;
+    int framesize = sizeof(currmsg);
+    zmq_msg_init_size(&msg, framesize);
+    memcpy(zmq_msg_data(&msg), &currmsg, framesize);
+
+    //struct message test;
+    //memcpy(&test, zmq_msg_data(&msg), sizeof(test));
+    //printf("Wrap: %f, %f, %f\r", test.x, test.y, test.z);
+    
+    zmq_msg_send(&msg, pub, ZMQ_DONTWAIT);
+}
+
+void cleanup(void* pub, void* context)
 {
     printf("\nClosing the program\n");
     zmq_close(pub);
-    zmq_close(sub);
     zmq_ctx_destroy(context);
 }
