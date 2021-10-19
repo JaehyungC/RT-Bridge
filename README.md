@@ -1,7 +1,7 @@
 # ZMQonPXI
 
-Jaehyung Choi
-Valero Lab
+Jaehyung Choi  
+Valero Lab  
 Updated October 19, 2021
 
 Currently, the PXI can do 2-way PUB SUB with the Raspbery Pi
