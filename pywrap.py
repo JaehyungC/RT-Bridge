@@ -1,0 +1,105 @@
+
+import sys
+import zmq
+import struct
+
+def connectsub(context, subname) :
+	socket = context.socket(zmq.SUB)
+	socket.connect(subname)
+	print("Python Subscriber connection successful!")
+	return socket
+
+def connectpub(context, pubname) :
+	socket = context.socket(zmq.PUB)
+	socket.bind(pubname)
+	print("Python Publisher connection successful!")
+	return socket 
+
+def setup(subsocket) :
+	# Set up filter
+	zip_filter = ""
+	subsocket.setsockopt_string(zmq.SUBSCRIBE, zip_filter)
+
+def cleanup():
+	print("\nClosing the Python program!")
+
+def startmsg(subsocket, pubsocket, csvfile_r, csvfile_s, csvwriter_r, csvwriter_s) :
+	epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
+	counter = 0
+	try :
+		while True :
+			# read from the socket and unpack into a tuple
+			msg = subsocket.recv()
+			recv_tuple = struct.unpack('QIBd', msg) 
+
+			# Write to CSV file
+			csvwriter_r.writerow(recv_tuple)
+
+			# Write to CSV file the latency time
+			#sendtime = recv_tuple[0] * 1000000 + recv_tuple[1]
+			#recvtime = ( datetime.now(timezone.utc) - epoch ) // timedelta(microseconds=1)
+			#latency = recvtime - sendtime
+			#iterable = (latency,)
+			#csvwriter_r.writerow(iterable)
+
+        	# Print every 10 iterations
+			if (counter % 10) == 0 :
+				print(str(recv_tuple[0]) + " ; " + str(recv_tuple[1]) + " ; " + str(recv_tuple[2])
+					+ " ; " + str(recv_tuple[3]), end="\r", flush=True)
+        		#print(str(latency), end="\r", flush=True) 
+				sys.stdout.flush()
+			counter = counter + 1
+
+        	# Calculate timestamp
+			timestamp = ( datetime.now(timezone.utc) - epoch ) // timedelta(microseconds=1)
+			timestamp_sec = timestamp // 1000000
+			timestamp_usec = timestamp % 1000000
+			timestamp_ms = timestamp_usec / 1000
+
+        	# Format packed message to be sent over socket
+			size = struct.calcsize('QIBd')
+			packedmsg = struct.pack('QIBd', timestamp_sec, timestamp_usec, size, math.sin(math.pi * timestamp_ms / 180) )
+
+        	# Send message and write to CSV file
+			pubsocket.send(packedmsg)
+			csvwriter_s.writerow((timestamp_sec, timestamp_usec, size, math.sin(math.pi * timestamp_ms / 180)))
+
+        	# Sleep for 0.1 milliseconds or 100 microseconds
+			sleep(0.0001)
+
+    # Clean up
+	except KeyboardInterrupt :
+		print("\nCTRL-C Interrupt detected\nClosing the Python program!")
+	finally :
+		csvfile_r.close()
+		csvfile_s.close()
+
+
+def headerdemo(subsocket, csvfile_r, csvwriter_r) :
+	epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
+	counter = 0
+	try :
+		while True :
+			# read from the socket and unpack into a tuple
+			msg = subsocket.recv()
+			recv_tuple = struct.unpack('QIBd', msg) 
+
+			# Write to CSV file
+			csvwriter_r.writerow(recv_tuple)
+
+        	# Print every 10 iterations
+			if (counter % 10) == 0 :
+				print(str(recv_tuple[0]) + " ; " + str(recv_tuple[1]) + " ; " + str(recv_tuple[2])
+					+ " ; " + str(recv_tuple[3]), end="\r", flush=True)
+        		#print(str(latency), end="\r", flush=True) 
+				sys.stdout.flush()
+			counter = counter + 1
+
+        	# Sleep for 0.1 milliseconds or 100 microseconds
+			sleep(0.0001)
+
+    # Clean up
+	except KeyboardInterrupt :
+		print("\nCTRL-C Interrupt detected\nClosing the Python program!")
+	finally :
+		csvfile_r.close()

@@ -1,4 +1,10 @@
-#include <czmq.h>
+#include <zmq.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <string.h>
 
 struct message
 {
@@ -18,7 +24,6 @@ void* bindpub(void* context, char* socket)
 {
     void* publisher = zmq_socket(context, ZMQ_PUB);
     int rc = zmq_bind(publisher, socket);
-    assert(rc == 0);
     printf("Publisher connected\n");
     return publisher;
 }
@@ -33,9 +38,10 @@ void* connectsub(void* context, char* socket)
     return subscriber;
 }
 
-void startmsg(void* pub, int* keepLooping)
+void startmsg(void* pub, void* sub, int* keepLooping)
 {
     signal(SIGINT, signalHandler);
+
     unsigned long long i = 0;
     while (*keepLooping)
     {
@@ -47,8 +53,19 @@ void startmsg(void* pub, int* keepLooping)
         zmq_msg_init_size(&msg, framesize);
         memcpy(zmq_msg_data(&msg), &currmsg, framesize);
         zmq_msg_send(&msg, pub, ZMQ_DONTWAIT);
-        printf("Sending %llu\r", currmsg.x);
         i++;
+
+        // Receive message
+        zmq_msg_t recv_msg;
+        zmq_msg_init(&recv_msg);
+        int size = zmq_msg_recv(&recv_msg, sub, ZMQ_DONTWAIT);
+        if (size != -1)
+        {
+            struct message recv_msg_struct;
+            memcpy(&recv_msg_struct, zmq_msg_data(&recv_msg), sizeof(recv_msg_struct));
+            printf("%llu\r", recv_msg_struct.x);
+        }
+        zmq_msg_close(&recv_msg);
     }
 }
 
@@ -62,16 +79,25 @@ void pubmsg(void* pub, float values[3]) {
     zmq_msg_init_size(&msg, framesize);
     memcpy(zmq_msg_data(&msg), &currmsg, framesize);
 
-    //struct message test;
-    //memcpy(&test, zmq_msg_data(&msg), sizeof(test));
-    //printf("Wrap: %f, %f, %f\r", test.x, test.y, test.z);
-    
     zmq_msg_send(&msg, pub, ZMQ_DONTWAIT);
 }
 
-void cleanup(void* pub, void* context)
+void submsg(void* sub) {
+    zmq_msg_t recv_msg;
+    zmq_msg_init(&recv_msg);
+    int size = zmq_msg_recv(&recv_msg, sub, ZMQ_DONTWAIT);
+    if (size != -1) {
+        struct messagefloat currmsg;
+        memcpy(&currmsg, zmq_msg_data(&recv_msg), sizeof(currmsg));
+        printf("%f, %f, %f\r", currmsg.x, currmsg.y, currmsg.z);
+    }
+    zmq_msg_close(&recv_msg);
+}
+
+void cleanup(void* pub, void* sub, void* context)
 {
     printf("\nClosing the program\n");
     zmq_close(pub);
+    zmq_close(sub);
     zmq_ctx_destroy(context);
 }
