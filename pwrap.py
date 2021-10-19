@@ -1,27 +1,33 @@
+# Python wrapper library
 
 import sys
 import zmq
 import struct
 
-def connectsub(context, subname) :
+def connectsub(context, subaddr) :
 	socket = context.socket(zmq.SUB)
-	socket.connect(subname)
+	socket.connect(subaddr)
+	zip_filter = ""
+	socket.setsockopt_string(zmq.SUBSCRIBE, zip_filter)
 	print("Python Subscriber connection successful!")
 	return socket
 
-def connectpub(context, pubname) :
+def bindpub(context, pubaddr) :
 	socket = context.socket(zmq.PUB)
-	socket.bind(pubname)
+	socket.bind(pubaddr)
 	print("Python Publisher connection successful!")
 	return socket 
 
-def setup(subsocket) :
-	# Set up filter
-	zip_filter = ""
-	subsocket.setsockopt_string(zmq.SUBSCRIBE, zip_filter)
+def pubmsg(pubsocket, float1, float2, float3) :
+	size = struct.calcsize('fff')
+	packedmsg = struct.pack('fff', float1, float2, float3)
+	pubsocket.send(packedmsg)
 
-def cleanup():
-	print("\nClosing the Python program!")
+def submsg(subsocket) :
+	msg = subsocket.recv()
+	recv_tuple = struct.unpack('fff', msg)
+	print(str(recv_tuple[0]) + " " + str(recv_tuple[1]) + "  " + str(recv_tuple[2]), end="\r", flush=True)
+    sys.stdout.flush()
 
 def startmsg(subsocket, pubsocket, csvfile_r, csvfile_s, csvwriter_r, csvwriter_s) :
 	epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
