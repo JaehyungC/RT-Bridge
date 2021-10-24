@@ -1,4 +1,4 @@
-#include "wrap.h"
+#include "zmqwrap.h"
 
 static int keepLooping = 1;
 

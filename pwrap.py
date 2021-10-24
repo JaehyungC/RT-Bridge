@@ -4,6 +4,7 @@ import sys
 import zmq
 import struct
 
+# Connects subscriber socket
 def connectsub(context, subaddr) :
 	socket = context.socket(zmq.SUB)
 	socket.connect(subaddr)
@@ -12,23 +13,27 @@ def connectsub(context, subaddr) :
 	print("Python Subscriber connection successful!")
 	return socket
 
+# Binds publisher socket
 def bindpub(context, pubaddr) :
 	socket = context.socket(zmq.PUB)
 	socket.bind(pubaddr)
 	print("Python Publisher connection successful!")
 	return socket 
 
+# Publishes a message
 def pubmsg(pubsocket, float1, float2, float3) :
 	size = struct.calcsize('fff')
 	packedmsg = struct.pack('fff', float1, float2, float3)
 	pubsocket.send(packedmsg)
 
+# Subscribes, and prints if it receives a message
 def submsg(subsocket) :
 	msg = subsocket.recv()
 	recv_tuple = struct.unpack('fff', msg)
 	print(str(recv_tuple[0]) + " " + str(recv_tuple[1]) + "  " + str(recv_tuple[2]), end="\r", flush=True)
     sys.stdout.flush()
 
+# Old main function used for testing pub sub
 def startmsg(subsocket, pubsocket, csvfile_r, csvfile_s, csvwriter_r, csvwriter_s) :
 	epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
 	counter = 0
@@ -40,13 +45,6 @@ def startmsg(subsocket, pubsocket, csvfile_r, csvfile_s, csvwriter_r, csvwriter_
 
 			# Write to CSV file
 			csvwriter_r.writerow(recv_tuple)
-
-			# Write to CSV file the latency time
-			#sendtime = recv_tuple[0] * 1000000 + recv_tuple[1]
-			#recvtime = ( datetime.now(timezone.utc) - epoch ) // timedelta(microseconds=1)
-			#latency = recvtime - sendtime
-			#iterable = (latency,)
-			#csvwriter_r.writerow(iterable)
 
         	# Print every 10 iterations
 			if (counter % 10) == 0 :
@@ -80,7 +78,7 @@ def startmsg(subsocket, pubsocket, csvfile_r, csvfile_s, csvwriter_r, csvwriter_
 		csvfile_r.close()
 		csvfile_s.close()
 
-
+# Old main function used for header file demo
 def headerdemo(subsocket, csvfile_r, csvwriter_r) :
 	epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
 	counter = 0

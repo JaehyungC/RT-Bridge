@@ -1,7 +1,6 @@
 # Python program
 
 import pwrap
-import zmq
 
 # Set up context
 context = zmq.Context()

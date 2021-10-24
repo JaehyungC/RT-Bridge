@@ -10,7 +10,7 @@ We've tried to use the ZMQ header files and functions within the quickDAQ projec
 We've also tried to build the quickDAQ project within the test Visual Studio project where PUB SUB is working<br>
 
 # Raspberry Pi
-raspi.c and raspiwrap.h are the files in the Raspberry Pi titled test.c and wrap.h<br>
+raspi.c, zmqwrap.c, and zmqwrap.h are the files in the Raspberry Pi titled test.c and wrap.h<br>
 Raspberry Pi:<br>
 Open Putty<br>
 Select Raspi-test, and click Open<br>
@@ -21,7 +21,7 @@ gcc test1.c -o test1 -lzmq<br>
 ./test1<br>
 
 # PXI
-pxitest.c and pxiwrap.h are the files in Desktop > JaehyungTesting > Test2 > Test3 > (Test3.c and wrap.h)<br>
+pxitest.c, zmqwrap.h, and zmqwrap.c are the files in Desktop > JaehyungTesting > Test2 > Test3 > (Test3.c, wrap.c, wrap.h)<br>
 Open Visual Studio 2019 and open Test3.sln<br>
 Run without debugging to run the code<br>
 
