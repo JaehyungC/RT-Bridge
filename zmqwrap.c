@@ -24,7 +24,7 @@ void* connectsub(void* context, char* socket)
 // Publishes a message
 void pubmsg(void* pub, float values[3]) 
 {
-    struct messagefloat currmsg;
+    messagefloat currmsg;
     currmsg.x = values[0];
     currmsg.y = values[1];
     currmsg.z = values[2];
@@ -43,7 +43,7 @@ void submsg(void* sub)
     zmq_msg_init(&recv_msg);
     int size = zmq_msg_recv(&recv_msg, sub, ZMQ_DONTWAIT);
     if (size != -1) {
-        struct messagefloat currmsg;
+        messagefloat currmsg;
         memcpy(&currmsg, zmq_msg_data(&recv_msg), sizeof(currmsg));
         printf("%f, %f, %f\r", currmsg.x, currmsg.y, currmsg.z);
     }
@@ -66,7 +66,7 @@ void startmsg(void* pub, int* keepLooping)
     while (*keepLooping)
     {
         // Send message
-        struct message currmsg;
+        message currmsg;
         currmsg.x = i;
         zmq_msg_t msg;
         int framesize = sizeof(currmsg);
