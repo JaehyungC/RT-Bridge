@@ -1,0 +1,7 @@
+﻿  pxitest.c
+C:\Users\PXI_BBDL\Desktop\JaehyungTesting\Test4\lib\clinkedlist\include\macrodef.h(55,1): warning C4005: 'max': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(193): message : see previous definition of 'max'
+C:\Users\PXI_BBDL\Desktop\JaehyungTesting\Test4\lib\clinkedlist\include\macrodef.h(63,1): warning C4005: 'min': macro redefinition
+C:\Program Files\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(197): message : see previous definition of 'min'
+C:\Users\PXI_BBDL\Desktop\JaehyungTesting\Test4\pxitest.c(84,37): warning C4244: '=': conversion from 'float64' to 'float', possible loss of data
+  Test4.vcxproj -> C:\Users\PXI_BBDL\Desktop\JaehyungTesting\Test4\Debug\Test4.exe

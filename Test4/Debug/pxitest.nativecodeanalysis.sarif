@@ -1,0 +1,327 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.28.29913.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "commandLine": "\"C:\\Program Files\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29910\\bin\\HostX86\\x86\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x003AB1C0 -il C:\\Users\\PXI_BBDL\\AppData\\Local\\Temp\\_CL_3bf71560ast -typedil -f pxitest.c -Ze -D_MSC_EXTENSIONS -Zp8 -Gs -pc \\:/ -D_MSC_VER=1928 -D_MSC_FULL_VER=192829913 -D_MSC_BUILD=0 -D_WIN32 -D_M_IX86=600 -D_M_IX86_FP=2 -GR -D_CPPRTTI -I C:\\Users\\PXI_BBDL\\Desktop\\JaehyungTesting\\Test4 -I C:\\dev\\vcpkg\\installed\\x86-windows\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -DCODE_ANALYSIS -DWIN32 -D_DEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D__MSVC_RUNTIME_CHECKS -RTCs -RTCu -MDd -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -FoDebug\\pxitest.obj -FdDebug\\vc142.pdb -Gd -analyze:projectdirectory C:\\Users\\PXI_BBDL\\Desktop\\JaehyungTesting\\Test4 -analyze:rulesetdirectory ;C:\\Program Files\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29910\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29910\\include -I C:\\Program Files\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29910\\atlmfc\\include -I C:\\Program Files\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files\\Windows Kits\\10\\Include\\10.0.17763.0\\ucrt -I C:\\Program Files\\Windows Kits\\10\\Include\\10.0.17763.0\\um -I C:\\Program Files\\Windows Kits\\10\\Include\\10.0.17763.0\\shared -I C:\\Program Files\\Windows Kits\\10\\Include\\10.0.17763.0\\winrt -I C:\\Program Files\\Windows Kits\\10\\Include\\10.0.17763.0\\cppwinrt -I C:\\Program Files\\Windows Kits\\NETFXSDK\\4.6.1\\Include\\um",
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/pxi_bbdl/desktop/jaehyungtesting/test4/zmqwrap.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "8bff8c7ba2c035d3976e8c856e2096c2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/pxi_bbdl/desktop/jaehyungtesting/test4/zmqwrap.h"
+          },
+          "hashes": {
+            "md5": "e29a1b97d57e18d35460c76dbdd375db"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/czmq.h"
+          },
+          "hashes": {
+            "md5": "19d33327a18769404aeff2d8456eb718"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/czmq_library.h"
+          },
+          "hashes": {
+            "md5": "bfe4f394bb31a51d94672029d1133d0e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/czmq_prelude.h"
+          },
+          "hashes": {
+            "md5": "0db74eff8b4d5380d0d09a0ac82db602"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zmq.h"
+          },
+          "hashes": {
+            "md5": "3a3a516e4415b065a91fc168592254d8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zactor.h"
+          },
+          "hashes": {
+            "md5": "a7aaaa496dc50aace83b1cc5f7b9afd6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zarmour.h"
+          },
+          "hashes": {
+            "md5": "ef3ff9f624e3de52dcee36fe3c001e9d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zcert.h"
+          },
+          "hashes": {
+            "md5": "67ca1dfd717a7d7b03c24c93b21efc57"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zcertstore.h"
+          },
+          "hashes": {
+            "md5": "7f647633031624a09e5ee3c739c0fba3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zchunk.h"
+          },
+          "hashes": {
+            "md5": "a1dd4da988ab29fe1c4107938e4d99e3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zclock.h"
+          },
+          "hashes": {
+            "md5": "82b65edb64e1723ce8b7e239d078aaee"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zconfig.h"
+          },
+          "hashes": {
+            "md5": "3c1993a99e43c3d7c1eb4b366de5811a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zdigest.h"
+          },
+          "hashes": {
+            "md5": "e216d1217d08205a3ab78460c27ef77d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zdir.h"
+          },
+          "hashes": {
+            "md5": "d40ed3d00fb83b97e718ad34258af2ae"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zdir_patch.h"
+          },
+          "hashes": {
+            "md5": "da6d30e7c65141c494d3aeb22d773137"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zfile.h"
+          },
+          "hashes": {
+            "md5": "baefaf5b44248078a53d5e1e807facfc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zframe.h"
+          },
+          "hashes": {
+            "md5": "ad7f4180a98c1cb97a372c6df81343e7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zhash.h"
+          },
+          "hashes": {
+            "md5": "36262935a396ca26eb5083d710dc25cc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zhashx.h"
+          },
+          "hashes": {
+            "md5": "09eda5ec1feaa610ababf350dea87f5c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/ziflist.h"
+          },
+          "hashes": {
+            "md5": "a8a572be7adb392a52c9fe9dfce8e642"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zlist.h"
+          },
+          "hashes": {
+            "md5": "f06ca3aa8e611dd47a7fee18774f4c6e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zlistx.h"
+          },
+          "hashes": {
+            "md5": "96b374bc245d662ade7aec9d2d72143d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zloop.h"
+          },
+          "hashes": {
+            "md5": "682ad2bf710194a3496a0d221f978166"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zmsg.h"
+          },
+          "hashes": {
+            "md5": "1f7730b2357b9d8c57422f74839429fb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zpoller.h"
+          },
+          "hashes": {
+            "md5": "f6b91da5c1a0e94dd72044ccbb6a3fdd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zsock.h"
+          },
+          "hashes": {
+            "md5": "55d25f1cfdc8f2bdbed2e7575cececdc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zstr.h"
+          },
+          "hashes": {
+            "md5": "22f5ebd7aa9dceb8bed281af9134b0a3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zsys.h"
+          },
+          "hashes": {
+            "md5": "8791c8b2fcaf05c2919e31e6ac04da3f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zuuid.h"
+          },
+          "hashes": {
+            "md5": "0a5b05489dbc1473432122f3fde3ee12"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zauth.h"
+          },
+          "hashes": {
+            "md5": "d63b35188b6d973175e9724444279ccc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zbeacon.h"
+          },
+          "hashes": {
+            "md5": "adb1e9416a9fc23484799790bad0f579"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zgossip.h"
+          },
+          "hashes": {
+            "md5": "9b93b8b5cba3c27c40a8ff5ae291bb10"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zmonitor.h"
+          },
+          "hashes": {
+            "md5": "70f86846b0e89594f9aa534bc1c8415b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zproxy.h"
+          },
+          "hashes": {
+            "md5": "c8a9aa36fc58e39b16ddb5622002eebf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/dev/vcpkg/installed/x86-windows/include/zrex.h"
+          },
+          "hashes": {
+            "md5": "e39dae768ee39f8ed028b10a7b99b891"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/pxi_bbdl/desktop/jaehyungtesting/test4/pxitest.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "de1380026ee973c43c54afde88191a16"
+          }
+        }
+      ]
+    }
+  ]
+}

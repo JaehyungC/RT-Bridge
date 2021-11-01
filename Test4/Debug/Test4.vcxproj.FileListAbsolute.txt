@@ -1,0 +1,3 @@
+C:\Users\PXI_BBDL\Desktop\JaehyungTesting\Test4\Debug\Test4.vcxproj.CopyComplete
+C:\Users\PXI_BBDL\Desktop\JaehyungTesting\Test4\Debug\Test4.exe
+C:\Users\PXI_BBDL\Desktop\JaehyungTesting\Test4\Debug\libzmq-v142-mt-gd-4_3_4.dll
