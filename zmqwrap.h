@@ -12,28 +12,58 @@
     #include <string.h>
 #endif
 
-typedef struct _message
-{
-    unsigned long long x;
-} message;
+#ifdef __cplusplus 
+extern "C" {
+#endif 
 
-typedef struct _messagefloat
-{
-    float x;
-    float y;
-    float z;
-} messagefloat;
+    /*!
+    * Defines a message with 1 integer data value.
+    */
+    typedef struct _message
+    {
+        unsigned long long x;
 
-void signalHandler(int signal_value);
+    } message;
 
-void* bindpub(void* context, char* socket);
+    /*!
+    * Defines a message with 3 float data values.
+    */
+    typedef struct _messagefloat
+    {
+        float x;
+        float y;
+        float z;
+        
+    } messagefloat;
 
-void* connectsub(void* context, char* socket);
+    // A flag that indicates whether to continue the code or not.
+    extern int keepLooping;
 
-void startmsg(void* pub, int* keepLooping);
+    // Updates the continuation flag in the event of an interrupt.
+    void signalHandler(int signal_value);
 
-void pubmsg(void* pub, float values[3]) ;
+    // Checks the continuation flag value.
+    int isLooping();
 
-void submsg(void* sub);
+    // Binds the publisher socket.
+    void* bindpub(void* context, char* socket);
 
-void cleanup(void* pub, void* context);
+    // Connects the subscriber socket.
+    void* connectsub(void* context, char* socket);
+
+    // Old function used to start the messaging in one command.
+    void startmsg(void* pub, int* keepLooping);
+
+    // Publishes the message to the publisher socket.
+    void pubmsg(void* pub, float values[3]);
+
+    // Reads from the subscriber socket and prints the received message.
+    void submsg(void* sub);
+
+    // Neatly closes the sockets and context at the end.
+    void cleanup(void* pub, void* sub, void* context);
+
+#ifdef __cplusplus 
+}
+#endif 
+

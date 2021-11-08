@@ -19,6 +19,7 @@ extern "C" {
     typedef struct _message
     {
         unsigned long long x;
+
     } message;
 
     typedef struct _messagefloat
@@ -26,6 +27,7 @@ extern "C" {
         float x;
         float y;
         float z;
+        
     } messagefloat;
 
     extern int keepLooping;

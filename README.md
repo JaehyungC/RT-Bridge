@@ -2,12 +2,11 @@
 
 Jaehyung Choi<br>
 Valero Lab<br>
-Updated October 19, 2021<br>
+Updated November 7, 2021<br>
 
-Currently, the PXI can do 2-way PUB SUB with the Raspbery Pi<br>
-The problem is that this works in other Visual Studio 2019 test projects, but not within the quickDAQ project<br>
-We've tried to use the ZMQ header files and functions within the quickDAQ project<br>
-We've also tried to build the quickDAQ project within the test Visual Studio project where PUB SUB is working<br>
+This repository documents the code for using ZMQ to send and receive messages between the PXI computer and the Raspberry Pi, or the hand.   
+Test4 is a folder containing the code from the working Visual Studio 2019 project on the PXI computer.   
+
 
 # Raspberry Pi
 raspi.c, zmqwrap.c, and zmqwrap.h are the files in the Raspberry Pi titled test.c and wrap.h<br>
